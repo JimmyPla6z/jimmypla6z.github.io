@@ -2,63 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JimmyPla6z | Home</title>
+  <title>JimmyPla6z | GitHub Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
     header { background: #24292e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
-    main { max-width: 700px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px #0001; }
-    section { margin-bottom: 2.5rem; }
-    h1, h2 { margin-top: 0; }
-    .repo-list { list-style: none; padding: 0; }
-    .repo-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
-    .repo-list li:last-child { border-bottom: none; }
-    .repo-name { font-weight: bold; }
-    .repo-desc { color: #555; margin-top: 0.2em; }
-    .repo-meta { font-size: 0.9em; color: #888; }
+    nav { background: #fff; border-bottom: 1px solid #e1e4e8; }
+    nav ul { display: flex; justify-content: center; list-style: none; margin: 0; padding: 0; }
+    nav li { margin: 0 1.5rem; }
+    nav a { color: #0366d6; text-decoration: none; font-weight: 500; font-size: 1.05em; padding: 1rem 0; display: block; position: relative; }
+    nav a.active, nav a:hover { color: #24292e; }
+    nav a.active:after, nav a:hover:after {
+      content: "";
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+      border-bottom: 2px solid #24292e;
+      padding-bottom: 2px;
+      margin-bottom: -2px;
+    }
+    main { max-width: 800px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px #0001; }
+    section { display: none; }
+    section.active { display: block; }
+    .repo-list, .star-list { list-style: none; padding: 0; }
+    .repo-list li, .star-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
+    .repo-list li:last-child, .star-list li:last-child { border-bottom: none; }
+    .repo-name, .star-name { font-weight: bold; }
+    .repo-desc, .star-desc { color: #555; margin-top: 0.2em; }
+    .repo-meta, .star-meta { font-size: 0.92em; color: #888; }
     a { color: #0366d6; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .contact { background: #f0f4f8; padding: 1em; border-radius: 6px; }
+    .section-title { margin-top: 0; }
+    .contrib-chart { max-width: 100%; margin: 2em 0; background: #fff; padding: 1em; border-radius: 6px; box-shadow: 0 1px 4px #0001; }
     @media (max-width: 600px) {
       main { padding: 1rem; }
+      nav ul { flex-direction: column; }
+      nav li { margin: 0.5rem 0; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>JimmyPla6z</h1>
-    <p>Welcome to my GitHub site! Explore my repositories and get in touch.</p>
+    <p>Welcome to my GitHub profile site!</p>
   </header>
+  <nav>
+    <ul>
+      <li><a href="#contributions" id="nav-contributions" class="active">Contributions</a></li>
+      <li><a href="#repositories" id="nav-repositories">Repositories</a></li>
+      <li><a href="#projects" id="nav-projects">Projects</a></li>
+      <li><a href="#packages" id="nav-packages">Packages</a></li>
+      <li><a href="#stars" id="nav-stars">Stars</a></li>
+    </ul>
+  </nav>
   <main>
-    <section id="about">
-      <h2>About Me</h2>
+    <section id="contributions" class="active">
+      <h2 class="section-title">Contributions</h2>
       <p>
-        Hi, I'm JimmyPla6z! I'm passionate about coding, open-source, and sharing my work. Check out my projects below.
+        Explore my recent activity and contributions on GitHub.<br>
+        <b>GitHub:</b> <a href="https://github.com/JimmyPla6z" target="_blank">JimmyPla6z</a>
       </p>
+      <div class="contrib-chart">
+        <h3>GitHub Contributions Chart</h3>
+        <img src="https://ghchart.rshah.org/24292e/JimmyPla6z" alt="GitHub Contributions Chart" style="width:100%;max-width:700px;">
+        <p style="font-size:0.95em;color:#888;">(This chart updates daily. Powered by <a href="https://ghchart.rshah.org/" target="_blank">ghchart</a>.)</p>
+      </div>
+      <div class="contact">
+        <b>Contact:</b> <a href="mailto:your.email@example.com">your.email@example.com</a>
+      </div>
     </section>
-
-    <section id="repos">
-      <h2>My GitHub Repositories</h2>
+    <section id="repositories">
+      <h2 class="section-title">Repositories</h2>
       <ul class="repo-list" id="repo-list">
         <li>Loading repositories…</li>
       </ul>
     </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="contact">
-        <p>
-          Want to connect? Reach out to me on <a href="https://github.com/JimmyPla6z" target="_blank">GitHub</a>
-          or email me at <a href="mailto:your.email@example.com">your.email@example.com</a>.
-        </p>
-      </div>
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p>
+        GitHub Projects are a great way to organize work.<br>
+        <a href="https://github.com/users/JimmyPla6z/projects" target="_blank">View my projects on GitHub</a>
+      </p>
+      <!-- You can add more details about your projects here if you want -->
+    </section>
+    <section id="packages">
+      <h2 class="section-title">Packages</h2>
+      <p>
+        Packages published by me on GitHub.<br>
+        <a href="https://github.com/JimmyPla6z?tab=packages" target="_blank">View my packages on GitHub</a>
+      </p>
+      <!-- You can fetch and list packages via the GitHub Packages API if desired -->
+    </section>
+    <section id="stars">
+      <h2 class="section-title">Stars</h2>
+      <ul class="star-list" id="star-list">
+        <li>Loading starred repositories…</li>
+      </ul>
     </section>
   </main>
   <footer style="text-align:center; color:#aaa; margin-top:2em; font-size:0.9em;">
     &copy; 2025 JimmyPla6z
   </footer>
   <script>
-    // Fetch public repos from GitHub API
+    // Navigation logic
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(
+        sec => sec.classList.remove('active')
+      );
+      document.getElementById(sectionId).classList.add('active');
+      document.querySelectorAll('nav a').forEach(
+        a => a.classList.remove('active')
+      );
+      document.getElementById('nav-' + sectionId).classList.add('active');
+    }
+    // Listen for nav clicks and hash changes
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const section = a.getAttribute('href').substring(1);
+        history.replaceState(null, '', '#' + section);
+        showSection(section);
+      });
+    });
+    window.addEventListener('hashchange', () => {
+      const section = location.hash.substring(1) || 'contributions';
+      if (document.getElementById(section)) showSection(section);
+    });
+    // Set initial section
+    window.addEventListener('DOMContentLoaded', () => {
+      const section = location.hash.substring(1) || 'contributions';
+      if (document.getElementById(section)) showSection(section);
+    });
+
+    // Fetch repositories
     fetch('https://api.github.com/users/JimmyPla6z/repos?per_page=100&sort=updated')
       .then(resp => resp.json())
       .then(repos => {
@@ -86,6 +163,34 @@
       })
       .catch(() => {
         document.getElementById('repo-list').innerHTML = '<li>Error loading repositories.</li>';
+      });
+
+    // Fetch starred repositories
+    fetch('https://api.github.com/users/JimmyPla6z/starred?per_page=100')
+      .then(resp => resp.json())
+      .then(stars => {
+        const list = document.getElementById('star-list');
+        list.innerHTML = '';
+        if (!stars.length) {
+          list.innerHTML = '<li>No starred repositories found.</li>';
+          return;
+        }
+        stars.forEach(repo => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="star-name">
+              <a href="${repo.html_url}" target="_blank">${repo.full_name}</a>
+            </div>
+            ${repo.description ? `<div class="star-desc">${repo.description}</div>` : ''}
+            <div class="star-meta">
+              ★ ${repo.stargazers_count} &nbsp; • &nbsp; ${repo.language || 'Unknown'}
+            </div>
+          `;
+          list.appendChild(li);
+        });
+      })
+      .catch(() => {
+        document.getElementById('star-list').innerHTML = '<li>Error loading starred repositories.</li>';
       });
   </script>
 </body>
