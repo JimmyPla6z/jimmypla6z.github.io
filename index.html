@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JimmyPla6z | GitHub Profile</title>
+  <title>JimmyPla6z | My GH Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
     header { background: #24292e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    main { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px #0001; }
+    h1, h2 { margin-top: 0; }
     nav { background: #fff; border-bottom: 1px solid #e1e4e8; }
     nav ul { display: flex; justify-content: center; list-style: none; margin: 0; padding: 0; }
     nav li { margin: 0 1.5rem; }
@@ -21,22 +23,21 @@
       padding-bottom: 2px;
       margin-bottom: -2px;
     }
-    main { max-width: 800px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px #0001; }
     section { display: none; }
     section.active { display: block; }
-    .repo-list, .star-list { list-style: none; padding: 0; }
-    .repo-list li, .star-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
-    .repo-list li:last-child, .star-list li:last-child { border-bottom: none; }
-    .repo-name, .star-name { font-weight: bold; }
+    .profile-info { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+    .profile-info img { border-radius: 50%; width: 120px; height: 120px; border: 3px solid #eee; background: #fff; }
+    .profile-meta { flex: 1; min-width: 0; }
+    .repo-list, .star-list, .event-list { list-style: none; padding: 0; margin: 0; }
+    .repo-list li, .star-list li, .event-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
+    .repo-list li:last-child, .star-list li:last-child, .event-list li:last-child { border-bottom: none; }
+    .repo-name, .star-name { font-weight: bold; font-size: 1.07em; }
     .repo-desc, .star-desc { color: #555; margin-top: 0.2em; }
-    .repo-meta, .star-meta { font-size: 0.92em; color: #888; }
-    a { color: #0366d6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .contact { background: #f0f4f8; padding: 1em; border-radius: 6px; }
-    .section-title { margin-top: 0; }
-    .contrib-chart { max-width: 100%; margin: 2em 0; background: #fff; padding: 1em; border-radius: 6px; box-shadow: 0 1px 4px #0001; }
-    @media (max-width: 600px) {
+    .repo-meta, .star-meta, .event-meta { font-size: 0.92em; color: #888; }
+    .event-type { font-weight: 500; }
+    @media (max-width: 700px) {
       main { padding: 1rem; }
+      .profile-info { flex-direction: column; gap: 1rem; text-align: center; }
       nav ul { flex-direction: column; }
       nav li { margin: 0.5rem 0; }
     }
@@ -45,59 +46,39 @@
 <body>
   <header>
     <h1>JimmyPla6z</h1>
-    <p>Welcome to my GitHub profile site!</p>
+    <p>My GitHub public profile, repositories, stars, and activity</p>
   </header>
   <nav>
     <ul>
-      <li><a href="#contributions" id="nav-contributions" class="active">Contributions</a></li>
+      <li><a href="#profile" id="nav-profile" class="active">Profile</a></li>
       <li><a href="#repositories" id="nav-repositories">Repositories</a></li>
-      <li><a href="#projects" id="nav-projects">Projects</a></li>
-      <li><a href="#packages" id="nav-packages">Packages</a></li>
       <li><a href="#stars" id="nav-stars">Stars</a></li>
+      <li><a href="#activity" id="nav-activity">Activity</a></li>
     </ul>
   </nav>
   <main>
-    <section id="contributions" class="active">
-      <h2 class="section-title">Contributions</h2>
-      <p>
-        Explore my recent activity and contributions on GitHub.<br>
-        <b>GitHub:</b> <a href="https://github.com/JimmyPla6z" target="_blank">JimmyPla6z</a>
-      </p>
-      <div class="contrib-chart">
-        <h3>GitHub Contributions Chart</h3>
-        <img src="https://ghchart.rshah.org/24292e/JimmyPla6z" alt="GitHub Contributions Chart" style="width:100%;max-width:700px;">
-        <p style="font-size:0.95em;color:#888;">(This chart updates daily. Powered by <a href="https://ghchart.rshah.org/" target="_blank">ghchart</a>.)</p>
-      </div>
-      <div class="contact">
-        <b>Contact:</b> <a href="mailto:your.email@example.com">your.email@example.com</a>
+    <section id="profile" class="active">
+      <h2>Profile</h2>
+      <div class="profile-info" id="profile-info">
+        Loading profile...
       </div>
     </section>
     <section id="repositories">
-      <h2 class="section-title">Repositories</h2>
+      <h2>Repositories</h2>
       <ul class="repo-list" id="repo-list">
         <li>Loading repositories…</li>
       </ul>
     </section>
-    <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <p>
-        GitHub Projects are a great way to organize work.<br>
-        <a href="https://github.com/users/JimmyPla6z/projects" target="_blank">View my projects on GitHub</a>
-      </p>
-      <!-- You can add more details about your projects here if you want -->
-    </section>
-    <section id="packages">
-      <h2 class="section-title">Packages</h2>
-      <p>
-        Packages published by me on GitHub.<br>
-        <a href="https://github.com/JimmyPla6z?tab=packages" target="_blank">View my packages on GitHub</a>
-      </p>
-      <!-- You can fetch and list packages via the GitHub Packages API if desired -->
-    </section>
     <section id="stars">
-      <h2 class="section-title">Stars</h2>
+      <h2>Starred Repositories</h2>
       <ul class="star-list" id="star-list">
         <li>Loading starred repositories…</li>
+      </ul>
+    </section>
+    <section id="activity">
+      <h2>Recent Public Activity</h2>
+      <ul class="event-list" id="event-list">
+        <li>Loading activity…</li>
       </ul>
     </section>
   </main>
@@ -116,7 +97,6 @@
       );
       document.getElementById('nav-' + sectionId).classList.add('active');
     }
-    // Listen for nav clicks and hash changes
     document.querySelectorAll('nav a').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
@@ -126,14 +106,35 @@
       });
     });
     window.addEventListener('hashchange', () => {
-      const section = location.hash.substring(1) || 'contributions';
+      const section = location.hash.substring(1) || 'profile';
       if (document.getElementById(section)) showSection(section);
     });
-    // Set initial section
     window.addEventListener('DOMContentLoaded', () => {
-      const section = location.hash.substring(1) || 'contributions';
+      const section = location.hash.substring(1) || 'profile';
       if (document.getElementById(section)) showSection(section);
     });
+
+    // Fetch profile info
+    fetch('https://api.github.com/users/JimmyPla6z')
+      .then(resp => resp.json())
+      .then(user => {
+        document.getElementById('profile-info').innerHTML = `
+          <img src="${user.avatar_url}" alt="avatar">
+          <div class="profile-meta">
+            <div style="font-size:1.2em; font-weight:bold;">${user.name || user.login}</div>
+            <div>@${user.login}</div>
+            ${user.bio ? `<div style="margin-top:0.5em;">${user.bio}</div>` : ''}
+            <div style="margin-top:0.5em;">
+              <b>Followers:</b> ${user.followers} &nbsp; • &nbsp; <b>Following:</b> ${user.following} <br>
+              <b>Public Repos:</b> ${user.public_repos} &nbsp; • &nbsp; <b>Public Gists:</b> ${user.public_gists}
+            </div>
+            ${user.location ? `<div style="margin-top:0.5em;"><b>Location:</b> ${user.location}</div>` : ''}
+          </div>
+        `;
+      })
+      .catch(() => {
+        document.getElementById('profile-info').innerHTML = "Error loading profile.";
+      });
 
     // Fetch repositories
     fetch('https://api.github.com/users/JimmyPla6z/repos?per_page=100&sort=updated')
@@ -156,6 +157,7 @@
             <div class="repo-meta">
               ★ ${repo.stargazers_count} &nbsp; • &nbsp; ${repo.language || 'Unknown'}
               ${repo.fork ? '&nbsp; • &nbsp; Forked' : ''}
+              &nbsp; • &nbsp; Updated: ${new Date(repo.updated_at).toLocaleDateString()}
             </div>
           `;
           list.appendChild(li);
@@ -184,6 +186,7 @@
             ${repo.description ? `<div class="star-desc">${repo.description}</div>` : ''}
             <div class="star-meta">
               ★ ${repo.stargazers_count} &nbsp; • &nbsp; ${repo.language || 'Unknown'}
+              &nbsp; • &nbsp; Owner: ${repo.owner.login}
             </div>
           `;
           list.appendChild(li);
@@ -191,6 +194,47 @@
       })
       .catch(() => {
         document.getElementById('star-list').innerHTML = '<li>Error loading starred repositories.</li>';
+      });
+
+    // Fetch recent public activity
+    fetch('https://api.github.com/users/JimmyPla6z/events/public?per_page=30')
+      .then(resp => resp.json())
+      .then(events => {
+        const list = document.getElementById('event-list');
+        list.innerHTML = '';
+        if (!Array.isArray(events) || !events.length) {
+          list.innerHTML = '<li>No recent public activity found.</li>';
+          return;
+        }
+        events.forEach(ev => {
+          let desc = '';
+          if (ev.type === "PushEvent") {
+            desc = `Pushed to <b>${ev.repo.name}</b>: ${ev.payload.commits.map(c=>c.message).join('; ')}`;
+          } else if (ev.type === "CreateEvent") {
+            desc = `Created ${ev.payload.ref_type} <b>${ev.payload.ref || ev.repo.name}</b> in <b>${ev.repo.name}</b>`;
+          } else if (ev.type === "IssuesEvent") {
+            desc = `${ev.payload.action} issue <b>#${ev.payload.issue.number}</b> in <b>${ev.repo.name}</b>: ${ev.payload.issue.title}`;
+          } else if (ev.type === "PullRequestEvent") {
+            desc = `${ev.payload.action} pull request <b>#${ev.payload.pull_request.number}</b> in <b>${ev.repo.name}</b>: ${ev.payload.pull_request.title}`;
+          } else if (ev.type === "ForkEvent") {
+            desc = `Forked <b>${ev.repo.name}</b>`;
+          } else if (ev.type === "WatchEvent") {
+            desc = `Starred <b>${ev.repo.name}</b>`;
+          } else if (ev.type === "ReleaseEvent") {
+            desc = `${ev.payload.action} release <b>${ev.payload.release.tag_name}</b> in <b>${ev.repo.name}</b>`;
+          } else {
+            desc = `${ev.type.replace(/Event$/, '')} in <b>${ev.repo.name}</b>`;
+          }
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span class="event-type">${desc}</span>
+            <span class="event-meta"><br>${new Date(ev.created_at).toLocaleString()}</span>
+          `;
+          list.appendChild(li);
+        });
+      })
+      .catch(() => {
+        document.getElementById('event-list').innerHTML = '<li>Error loading activity.</li>';
       });
   </script>
 </body>
