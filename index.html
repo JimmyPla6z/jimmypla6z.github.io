@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JimmyPla6z | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
+    header { background: #24292e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    main { max-width: 700px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 12px #0001; }
+    section { margin-bottom: 2.5rem; }
+    h1, h2 { margin-top: 0; }
+    .repo-list { list-style: none; padding: 0; }
+    .repo-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
+    .repo-list li:last-child { border-bottom: none; }
+    .repo-name { font-weight: bold; }
+    .repo-desc { color: #555; margin-top: 0.2em; }
+    .repo-meta { font-size: 0.9em; color: #888; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .contact { background: #f0f4f8; padding: 1em; border-radius: 6px; }
+    @media (max-width: 600px) {
+      main { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JimmyPla6z</h1>
+    <p>Welcome to my GitHub site! Explore my repositories and get in touch.</p>
+  </header>
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Hi, I'm JimmyPla6z! I'm passionate about coding, open-source, and sharing my work. Check out my projects below.
+      </p>
+    </section>
+
+    <section id="repos">
+      <h2>My GitHub Repositories</h2>
+      <ul class="repo-list" id="repo-list">
+        <li>Loading repositories…</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact">
+        <p>
+          Want to connect? Reach out to me on <a href="https://github.com/JimmyPla6z" target="_blank">GitHub</a>
+          or email me at <a href="mailto:your.email@example.com">your.email@example.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer style="text-align:center; color:#aaa; margin-top:2em; font-size:0.9em;">
+    &copy; 2025 JimmyPla6z
+  </footer>
+  <script>
+    // Fetch public repos from GitHub API
+    fetch('https://api.github.com/users/JimmyPla6z/repos?per_page=100&sort=updated')
+      .then(resp => resp.json())
+      .then(repos => {
+        const list = document.getElementById('repo-list');
+        list.innerHTML = '';
+        if (!repos.length) {
+          list.innerHTML = '<li>No public repositories found.</li>';
+          return;
+        }
+        repos.sort((a,b) => b.stargazers_count - a.stargazers_count);
+        repos.forEach(repo => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="repo-name">
+              <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+            </div>
+            ${repo.description ? `<div class="repo-desc">${repo.description}</div>` : ''}
+            <div class="repo-meta">
+              ★ ${repo.stargazers_count} &nbsp; • &nbsp; ${repo.language || 'Unknown'}
+              ${repo.fork ? '&nbsp; • &nbsp; Forked' : ''}
+            </div>
+          `;
+          list.appendChild(li);
+        });
+      })
+      .catch(() => {
+        document.getElementById('repo-list').innerHTML = '<li>Error loading repositories.</li>';
+      });
+  </script>
+</body>
+</html>
