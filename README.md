@@ -42,10 +42,4 @@ Your own GitHub Hub will be live at `https://<your-username>.github.io`!
 
 ---
 
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
----
-
 *Built and maintained by [JimmyPla6z](https://github.com/JimmyPla6z)*
