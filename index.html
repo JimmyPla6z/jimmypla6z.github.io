@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JimmyPla6z | My Github Hub</title>
-  <link rel="icon" type="image/png" href="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7914417/github-icon-md.png">
+  <title>JimmyPla6z | GitHub Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
@@ -36,6 +35,16 @@
     .repo-desc, .star-desc { color: #555; margin-top: 0.2em; }
     .repo-meta, .star-meta, .event-meta { font-size: 0.92em; color: #888; }
     .event-type { font-weight: 500; }
+    .contact-form label { display: block; margin: 0.7em 0 0.2em 0; }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea { width: 100%; padding: 0.4em; border: 1px solid #bbb; border-radius: 4px; }
+    .contact-form textarea { min-height: 70px; }
+    .contact-form button { margin-top: 1em; padding: 0.6em 2em; font-size: 1em; background: #24292e; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    .contact-form button:hover { background: #444; }
+    .contact-form .checkbox-inline { display: inline-block; margin-left: 0.5em; font-weight: normal; }
+    .contact-form .required { color: #d00; }
+    .contact-form .form-result { margin-top: 1em; }
     @media (max-width: 700px) {
       main { padding: 1rem; }
       .profile-info { flex-direction: column; gap: 1rem; text-align: center; }
@@ -47,7 +56,7 @@
 <body>
   <header>
     <h1>JimmyPla6z</h1>
-    <p>My GitHub public profile, repositories, stars, and activity</p>
+    <p>My GitHub public profile, repositories, stars, activity, and contact</p>
   </header>
   <nav>
     <ul>
@@ -55,6 +64,7 @@
       <li><a href="#repositories" id="nav-repositories">Repositories</a></li>
       <li><a href="#stars" id="nav-stars">Stars</a></li>
       <li><a href="#activity" id="nav-activity">Activity</a></li>
+      <li><a href="#contact" id="nav-contact">Contact</a></li>
     </ul>
   </nav>
   <main>
@@ -81,6 +91,57 @@
       <ul class="event-list" id="event-list">
         <li>Loading activity…</li>
       </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form
+        class="contact-form"
+        id="contact-form"
+        action="https://formspree.io/f/xanjygkg"
+        method="POST"
+        enctype="multipart/form-data"
+        autocomplete="off"
+        novalidate
+      >
+        <label>
+          First Name:
+          <input type="text" name="first_name" id="first_name">
+          <span class="checkbox-inline">
+            <input type="checkbox" id="anon_first" name="anon_first">
+            I'd prefer not to say
+          </span>
+        </label>
+        <label>
+          Last Name:
+          <input type="text" name="last_name" id="last_name">
+          <span class="checkbox-inline">
+            <input type="checkbox" id="anon_last" name="anon_last">
+            I'd prefer not to say
+          </span>
+        </label>
+        <label>
+          Email: <span class="required">*</span>
+          <input type="email" name="email" id="email" required>
+        </label>
+        <label>
+          Username/Company Name: <span class="required">*</span>
+          <input type="text" name="user_company" id="user_company" required>
+        </label>
+        <label>
+          Inquiry Details: <span class="required">*</span>
+          <input type="text" name="inquiry" id="inquiry" required>
+        </label>
+        <label>
+          Message: <span class="required">*</span>
+          <textarea name="message" id="message" required></textarea>
+        </label>
+        <label>
+          File Attachment:
+          <input type="file" name="attachment" id="attachment">
+        </label>
+        <button type="submit">Send</button>
+        <div class="form-result" id="form-result" style="color:#d00;"></div>
+      </form>
     </section>
   </main>
   <footer style="text-align:center; color:#aaa; margin-top:2em; font-size:0.9em;">
@@ -130,6 +191,7 @@
               <b>Public Repos:</b> ${user.public_repos} &nbsp; • &nbsp; <b>Public Gists:</b> ${user.public_gists}
             </div>
             ${user.location ? `<div style="margin-top:0.5em;"><b>Location:</b> ${user.location}</div>` : ''}
+            ${user.email ? `<div style="margin-top:0.5em;"><b>Email:</b> <a href="mailto:${user.email}">${user.email}</a></div>` : ''}
           </div>
         `;
       })
@@ -237,6 +299,38 @@
       .catch(() => {
         document.getElementById('event-list').innerHTML = '<li>Error loading activity.</li>';
       });
+
+    // Contact form validation
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      let valid = true;
+      let firstName = document.getElementById('first_name').value.trim();
+      let lastName = document.getElementById('last_name').value.trim();
+      let anonFirst = document.getElementById('anon_first').checked;
+      let anonLast = document.getElementById('anon_last').checked;
+      let email = document.getElementById('email').value.trim();
+      let userCompany = document.getElementById('user_company').value.trim();
+      let inquiry = document.getElementById('inquiry').value.trim();
+      let message = document.getElementById('message').value.trim();
+
+      // Validation logic
+      if (!anonFirst && firstName === "") valid = false;
+      if (!anonLast && lastName === "") valid = false;
+      if (email === "" || userCompany === "" || inquiry === "" || message === "") valid = false;
+
+      if (!valid) {
+        e.preventDefault();
+        document.getElementById('form-result').innerText = "Please fill out all required fields or check 'I'd prefer not to say' for names.";
+        return;
+      }
+
+      // If "I'd prefer not to say" is checked, replace with "Not Applicated"
+      if (anonFirst) {
+        document.getElementById('first_name').value = "Not Applicated";
+      }
+      if (anonLast) {
+        document.getElementById('last_name').value = "Not Applicated";
+      }
+    });
   </script>
 </body>
 </html>
