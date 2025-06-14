@@ -60,11 +60,11 @@
   </header>
   <nav>
     <ul>
-      <li><a href="#profile" id="nav-profile" class="active">Profile</a></li>
-      <li><a href="#repositories" id="nav-repositories">Repositories</a></li>
-      <li><a href="#stars" id="nav-stars">Stars</a></li>
-      <li><a href="#activity" id="nav-activity">Activity</a></li>
-      <li><a href="#contact" id="nav-contact">Contact</a></li>
+      <li><a href="/profile" id="nav-profile" class="active">Profile</a></li>
+      <li><a href="/repositories" id="nav-repositories">Repositories</a></li>
+      <li><a href="/stars" id="nav-stars">Stars</a></li>
+      <li><a href="/activity" id="nav-activity">Activity</a></li>
+      <li><a href="/contact" id="nav-contact">Contact</a></li>
     </ul>
   </nav>
   <main>
@@ -152,7 +152,9 @@
     &copy; 2025 JimmyPla6z
   </footer>
   <script>
-    // Navigation logic
+    // SPA navigation using History API
+    const sections = ['profile', 'repositories', 'stars', 'activity', 'contact', 'thankyou'];
+
     function showSection(sectionId) {
       document.querySelectorAll('section').forEach(
         sec => sec.classList.remove('active')
@@ -165,22 +167,46 @@
       if (document.getElementById('nav-' + sectionId))
         document.getElementById('nav-' + sectionId).classList.add('active');
     }
+
+    function sectionFromPath(path) {
+      // Remove leading slash and any query/hash
+      let seg = path.replace(/^\/+/, '').split(/[?#]/)[0];
+      return sections.includes(seg) ? seg : 'profile';
+    }
+
+    function pushSection(sectionId) {
+      history.pushState({section: sectionId}, '', '/' + sectionId);
+      showSection(sectionId);
+    }
+
+    // Navigation link handling
     document.querySelectorAll('nav a').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
-        const section = a.getAttribute('href').substring(1);
-        history.replaceState(null, '', '#' + section);
-        showSection(section);
+        const pathname = a.getAttribute('href');
+        const section = sectionFromPath(pathname);
+        pushSection(section);
       });
     });
-    window.addEventListener('hashchange', () => {
-      const section = location.hash.substring(1) || 'profile';
-      if (document.getElementById(section)) showSection(section);
+
+    // Popstate handler for browser navigation
+    window.addEventListener('popstate', () => {
+      const section = sectionFromPath(location.pathname);
+      showSection(section);
     });
+
+    // On load, show correct section
     window.addEventListener('DOMContentLoaded', () => {
-      const section = location.hash.substring(1) || 'profile';
-      if (document.getElementById(section)) showSection(section);
+      const section = sectionFromPath(location.pathname);
+      showSection(section);
     });
+
+    // SPA fallback for GitHub Pages (redirect from 404.html)
+    if (location.search.startsWith('?redirect=')) {
+      const path = decodeURIComponent(location.search.replace('?redirect=', ''));
+      history.replaceState(null, '', path);
+      showSection(sectionFromPath(path));
+    }
 
     // Fetch profile info
     fetch('https://api.github.com/users/JimmyPla6z')
@@ -349,8 +375,7 @@
           headers: { 'Accept': 'application/json' }
         });
         if (response.ok) {
-          window.location.hash = "#thankyou";
-          showSection('thankyou');
+          pushSection('thankyou');
         } else {
           document.getElementById('form-result').innerText = "There was an error. Please try again.";
         }
