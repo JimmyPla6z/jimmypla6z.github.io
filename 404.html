@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Page Not Found</title>
+  <title>Page Not Found | JimmyPla6z</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <script>
-    // SPA redirect for GitHub Pages
+    // Only redirect if NOT at root or /index.html
     var l = window.location;
-    var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
-    window.location.replace(redirectUrl);
+    var path = l.pathname.replace(/\/+$/, ''); // Remove trailing slash
+    if (path && path !== "/index.html") {
+      var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
+      window.location.replace(redirectUrl);
+    }
+    // Otherwise, stay here and show default 404 content or just blank page
   </script>
   <p>If you are not redirected, <a id="redir" href="/">click here</a>.</p>
-  <script>
-    document.getElementById('redir').href = redirectUrl;
-  </script>
 </body>
 </html>
