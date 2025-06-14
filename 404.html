@@ -4,18 +4,36 @@
   <meta charset="UTF-8">
   <title>Page Not Found | JimmyPla6z</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #222; margin: 0; }
+    .container { max-width: 600px; margin: 10vh auto 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px #0002; padding: 2.5em 2em; text-align: center;}
+    h1 { font-size: 2.5em; margin-bottom: 0.4em; }
+    p { color: #444; margin-bottom: 2em; }
+    @media (max-width: 700px) {
+      .container { padding: 1.5em 0.5em; }
+      h1 { font-size: 2em; }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>404: Page Not Found</h1>
+    <p>Sorry, the page you requested does not exist.<br>
+    Redirecting you to the correct page...</p>
+    <p>If you are not redirected, <a id="redirect-link" href="/">click here</a> to go to the home page.</p>
+  </div>
   <script>
-    // Only redirect if NOT at root or /index.html
-    var l = window.location;
-    var path = l.pathname.replace(/\/+$/, ''); // Remove trailing slash
-    if (path && path !== "/index.html") {
-      var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
-      window.location.replace(redirectUrl);
-    }
-    // Otherwise, stay here and show default 404 content or just blank page
+    // GitHub Pages SPA redirect (based on rafgraph/spa-github-pages)
+    (function() {
+      var l = window.location;
+      var path = l.pathname.replace(/\/+$/, '');
+      // Only redirect if not root or /index.html
+      if (path && path !== "/index.html") {
+        var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
+        document.getElementById('redirect-link').href = redirectUrl;
+        window.location.replace(redirectUrl);
+      }
+    })();
   </script>
-  <p>If you are not redirected, <a id="redir" href="/">click here</a>.</p>
 </body>
 </html>
