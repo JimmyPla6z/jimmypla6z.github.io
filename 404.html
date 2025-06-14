@@ -20,18 +20,15 @@
     <h1>404: Page Not Found</h1>
     <p>Sorry, the page you requested does not exist.<br>
     Redirecting you to the correct page...</p>
-    <p>If you are not redirected, <a id="redirect-link" href="/">click here</a> to go to the home page.</p>
+    <p>If you are not redirected, <a id="redirect-link" href="/index.html">click here</a> to go to the home page.</p>
   </div>
   <script>
-    // SPA redirect for GitHub Pages
     (function() {
       var l = window.location;
       var path = l.pathname.replace(/\/+$/, "") || "/";
-      // List of valid SPA routes (update if you add more sections)
       var spaRoutes = [
         "/", "/index.html", "/profile", "/repositories", "/stars", "/activity", "/contact", "/thankyou", "/notfound"
       ];
-      // Only redirect for routes NOT handled by the SPA
       if (!spaRoutes.includes(path)) {
         var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
         document.getElementById('redirect-link').href = redirectUrl;
