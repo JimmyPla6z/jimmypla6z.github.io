@@ -26,10 +26,13 @@
     // SPA redirect for GitHub Pages
     (function() {
       var l = window.location;
-      // Normalize path for comparison (remove trailing slashes)
       var path = l.pathname.replace(/\/+$/, "") || "/";
-      // Only redirect if NOT at root ("/") or index.html
-      if (path !== "/" && path !== "/index.html") {
+      // List of valid SPA routes (update if you add more sections)
+      var spaRoutes = [
+        "/", "/index.html", "/profile", "/repositories", "/stars", "/activity", "/contact", "/thankyou", "/notfound"
+      ];
+      // Only redirect for routes NOT handled by the SPA
+      if (!spaRoutes.includes(path)) {
         var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
         document.getElementById('redirect-link').href = redirectUrl;
         window.location.replace(redirectUrl);
