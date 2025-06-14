@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JimmyPla6z | My GitHub Hub</title>
-  <link rel="icon" type="image/png" href="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7914417/github-icon-md.png">
+  <title>JimmyPla6z | GitHub Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
@@ -144,6 +143,10 @@
         <div class="form-result" id="form-result" style="color:#d00;"></div>
       </form>
     </section>
+    <section id="thankyou">
+      <h2>Thank You!</h2>
+      <p>Your message has been sent. I appreciate your inquiry!</p>
+    </section>
   </main>
   <footer style="text-align:center; color:#aaa; margin-top:2em; font-size:0.9em;">
     &copy; 2025 JimmyPla6z
@@ -154,11 +157,13 @@
       document.querySelectorAll('section').forEach(
         sec => sec.classList.remove('active')
       );
-      document.getElementById(sectionId).classList.add('active');
+      if (document.getElementById(sectionId))
+        document.getElementById(sectionId).classList.add('active');
       document.querySelectorAll('nav a').forEach(
         a => a.classList.remove('active')
       );
-      document.getElementById('nav-' + sectionId).classList.add('active');
+      if (document.getElementById('nav-' + sectionId))
+        document.getElementById('nav-' + sectionId).classList.add('active');
     }
     document.querySelectorAll('nav a').forEach(a => {
       a.addEventListener('click', e => {
@@ -301,8 +306,9 @@
         document.getElementById('event-list').innerHTML = '<li>Error loading activity.</li>';
       });
 
-    // Contact form validation
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    // Contact form validation and custom submit handling
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
       let valid = true;
       let firstName = document.getElementById('first_name').value.trim();
       let lastName = document.getElementById('last_name').value.trim();
@@ -319,7 +325,6 @@
       if (email === "" || userCompany === "" || inquiry === "" || message === "") valid = false;
 
       if (!valid) {
-        e.preventDefault();
         document.getElementById('form-result').innerText = "Please fill out all required fields or check 'I'd prefer not to say' for names.";
         return;
       }
@@ -330,6 +335,27 @@
       }
       if (anonLast) {
         document.getElementById('last_name').value = "Not Applicated";
+      }
+
+      // Prepare data for Formspree
+      const form = e.target;
+      const data = new FormData(form);
+
+      // Send via fetch
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          window.location.hash = "#thankyou";
+          showSection('thankyou');
+        } else {
+          document.getElementById('form-result').innerText = "There was an error. Please try again.";
+        }
+      } catch (error) {
+        document.getElementById('form-result').innerText = "There was an error. Please try again.";
       }
     });
   </script>
