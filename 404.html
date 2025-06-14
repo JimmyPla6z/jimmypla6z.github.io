@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Page Not Found | JimmyPla6z</title>
+  <title>404: Page Not Found</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: system-ui, sans-serif; background: #f8f9fa; color: #222; margin: 0; }
@@ -19,22 +19,15 @@
   <div class="container">
     <h1>404: Page Not Found</h1>
     <p>Sorry, the page you requested does not exist.<br>
-    Redirecting you to the correct page...</p>
-    <p>If you are not redirected, <a id="redirect-link" href="/index.html">click here</a> to go to the home page.</p>
+    Redirecting you to the correct page…</p>
+    <p>If you are not redirected, <a id="redirect-link" href="/">click here</a> to go to the home page.</p>
   </div>
   <script>
-    (function() {
-      var l = window.location;
-      var path = l.pathname.replace(/\/+$/, "") || "/";
-      var spaRoutes = [
-        "/", "/index.html", "/profile", "/repositories", "/stars", "/activity", "/contact", "/thankyou", "/notfound"
-      ];
-      if (!spaRoutes.includes(path)) {
-        var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
-        document.getElementById('redirect-link').href = redirectUrl;
-        window.location.replace(redirectUrl);
-      }
-    })();
+    // Always redirect to index.html for SPA routes
+    var l = window.location;
+    var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
+    document.getElementById('redirect-link').href = redirectUrl;
+    window.location.replace(redirectUrl);
   </script>
 </body>
 </html>
