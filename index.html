@@ -163,6 +163,17 @@
     &copy; 2025 JimmyPla6z
   </footer>
   <script>
+  // List your SPA routes
+  const spaRoutes = [
+    "/profile", "/repositories", "/stars", "/activity", "/contact", "/thankyou"
+  ];
+  // If the path is a known SPA route and there is no hash, redirect to the hash version
+  const currentPath = window.location.pathname;
+  if (spaRoutes.includes(currentPath) && !window.location.hash) {
+    const search = window.location.search || '';
+    const hash = window.location.hash || '';
+    window.location.replace('/#' + currentPath.slice(1) + search + hash);
+    
     // SPA navigation using hash-based routing
     const sections = ['profile', 'repositories', 'stars', 'activity', 'contact', 'thankyou', 'notfound'];
 
