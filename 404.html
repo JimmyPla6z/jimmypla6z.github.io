@@ -23,12 +23,13 @@
     <p>If you are not redirected, <a id="redirect-link" href="/">click here</a> to go to the home page.</p>
   </div>
   <script>
-    // GitHub Pages SPA redirect (based on rafgraph/spa-github-pages)
+    // SPA redirect for GitHub Pages
     (function() {
       var l = window.location;
-      var path = l.pathname.replace(/\/+$/, '');
-      // Only redirect if not root or /index.html
-      if (path && path !== "/index.html") {
+      // Normalize path for comparison (remove trailing slashes)
+      var path = l.pathname.replace(/\/+$/, "") || "/";
+      // Only redirect if NOT at root ("/") or index.html
+      if (path !== "/" && path !== "/index.html") {
         var redirectUrl = "/index.html?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash);
         document.getElementById('redirect-link').href = redirectUrl;
         window.location.replace(redirectUrl);
